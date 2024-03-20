@@ -3,6 +3,7 @@
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { useEffect } from "react";
 
+
 const Setupage = () => {
   const onOpen = useStoreModal((state)=> state.onOpen)
   const isOpen = useStoreModal((state)=> state.isOpen)
@@ -12,8 +13,9 @@ const Setupage = () => {
     onOpen()
   }
   },[isOpen,onOpen])
+
   return (
-    null
+  null
   );
 }
 
