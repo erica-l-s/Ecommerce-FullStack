@@ -7,9 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
+import axios from "axios";
 import { Trash } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 
@@ -27,6 +31,9 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 initialData
 }) => {
 
+    const params = useParams()
+    const router = useRouter()
+
     const [open,setOpen] = useState(false)
     const [ loading, setLoading] = useState(false)
 
@@ -36,7 +43,17 @@ initialData
     })
 
     const onSubmit = async (data:SettingFormValues) => {
-        console.log(data)
+        
+        try {
+            setLoading(true)
+            await axios.patch(`/api/stores/${params.storeId}`,data)
+            router.refresh()
+            toast.success("Store updated.")
+        } catch (error) {
+           toast.error("Something went wrong.") 
+        }finally{
+            setLoading(false)
+        }
     }
 
     return(
@@ -47,9 +64,10 @@ initialData
            description='Manage store preferences'
            />
            <Button
+           disabled={loading}
            variant='destructive'
            size='sm'
-           onClick={()=>{}}
+           onClick={()=>{setOpen(true)}}
            >
           <Trash className="h-4 w-4"/>
            </Button>
@@ -65,7 +83,7 @@ initialData
                 <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                        <Input disabled={loading} placeholder="Store Name"/>
+                        <Input disabled={loading} placeholder="Store Name" {...field}/>
                     </FormControl>
                     <FormMessage/>
                 </FormItem>
