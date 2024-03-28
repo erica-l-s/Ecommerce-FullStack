@@ -1,9 +1,11 @@
-import React from 'react'
+import  { BillboardForm } from "./[billboardId]/components/billboard-form"
 
-function BillboardsPage() {
-    return (
-        <div className='flex-col'>
-            <div className='flex-1 space-y-4 p-8 pt-6'>
+const BillboardsPage = () =>{
+    return(
+        <div className="flex-col">
+            <div className="flex-1 space-y-4 p-8 pt-6">
+              <BillboardForm/>
+
             </div>
         </div>
     )
