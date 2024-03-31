@@ -8,7 +8,7 @@ import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Billboard, Store } from "@prisma/client";
+import { Billboard} from "@prisma/client";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -80,7 +80,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             setLoading(true)
             await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh()
-            router.push("/")
+            router.push(`/${params.storeId}/billboards`)
             toast.success("Store deleted")
         } catch (error) {
             toast.error("Make sure you removed all categories using this billboard?")
@@ -163,8 +163,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                 </form>
 
             </Form>
-            <Separator />
-
         </>
     )
 }
