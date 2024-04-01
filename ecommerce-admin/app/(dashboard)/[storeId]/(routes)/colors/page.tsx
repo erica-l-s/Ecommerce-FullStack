@@ -3,8 +3,6 @@ import prismadb from "@/lib/prismadb"
 import { SizesClient } from "./components/client"
 import { SizeColumn } from "./components/columns"
 
-
-
 const SizesPage = async ({
     params
 }:{params:{storeId: string}

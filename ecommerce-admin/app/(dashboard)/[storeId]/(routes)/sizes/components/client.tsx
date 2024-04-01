@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button"
 import Heading from "@/components/ui/heading"
 import { Plus } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
-import { SizeColumn, columns } from "./columns"
+import {  SizeColumn, columns } from "./columns"
 import { Separator } from "@/components/ui/separator"
 import { DataTable } from "@/components/ui/data-table"
 import { ApiList } from "@/components/ui/api-list"
+
 
 interface SizesClientProps{
     data:SizeColumn[]

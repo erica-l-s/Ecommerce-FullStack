@@ -4,11 +4,11 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import Heading from "@/components/ui/heading";
-import ImageUpload from "@/components/ui/image-upload";
+
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Size} from "@prisma/client";
+import { Color } from "@prisma/client";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -21,17 +21,20 @@ import { z } from "zod";
 
 const formSchema = z.object({
     name: z.string().min(1),
-    value: z.string().min(1)
+    value: z.string().min(4).regex(/^#/,{
+        message:'String must bu a valid hex code'
+    }
+    )
 
 })
 
 
-type SizeFormValues = z.infer<typeof formSchema>
+type ColorFormValues = z.infer<typeof formSchema>
 
-interface SizeFormProps {
-    initialData: Size | null
+interface ColorFormProps {
+    initialData: Color | null
 }
-export const SizeForm: React.FC<SizeFormProps> = ({
+export const ColorForm: React.FC<ColorFormProps> = ({
     initialData
 }) => {
 
@@ -48,7 +51,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
     const action = initialData ? "Save changes" : "Create"
 
 
-    const form = useForm<SizeFormValues>({
+    const form = useForm<ColorFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
             name: '',
