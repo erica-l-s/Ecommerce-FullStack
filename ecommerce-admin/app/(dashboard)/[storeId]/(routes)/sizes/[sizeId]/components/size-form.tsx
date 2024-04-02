@@ -78,7 +78,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/sizes/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`)
             router.refresh()
             router.push(`/${params.storeId}/sizes`)
             toast.success("Store deleted")

@@ -22,9 +22,8 @@ import { z } from "zod";
 const formSchema = z.object({
     name: z.string().min(1),
     value: z.string().min(4).regex(/^#/,{
-        message:'String must bu a valid hex code'
-    }
-    )
+        message:'String must bu a valid hex code',
+    })
 
 })
 
@@ -45,9 +44,9 @@ export const ColorForm: React.FC<ColorFormProps> = ({
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const title = initialData ? "Edit sizes" : "Create sizes"
-    const description = initialData ? "Edit a sizes" : "Add a new sizes"
-    const toastMessage = initialData ? "Sizes updated" : "Sizes created"
+    const title = initialData ? "Edit colors" : "Create colors"
+    const description = initialData ? "Edit a colors" : "Add a new colors"
+    const toastMessage = initialData ? "Colors updated" : "Colors created"
     const action = initialData ? "Save changes" : "Create"
 
 
@@ -59,17 +58,17 @@ export const ColorForm: React.FC<ColorFormProps> = ({
         }
     })
 
-    const onSubmit = async (data: SizeFormValues) => {
+    const onSubmit = async (data: ColorFormValues) => {
 
         try {
             setLoading(true)
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data)
+                await axios.patch(`/api/${params.storeId}/colors/${params.colorId}`, data)
             } else {
-                await axios.post(`/api/${params.storeId}/sizes`, data)
+                await axios.post(`/api/${params.storeId}/colors`, data)
             }
             router.refresh()
-            router.push(`/${params.storeId}/sizes`)
+            router.push(`/${params.storeId}/colors`)
             toast.success(toastMessage)
         } catch (error) {
             toast.error("Something went wrong.")
@@ -81,12 +80,12 @@ export const ColorForm: React.FC<ColorFormProps> = ({
     const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/sizes/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`)
             router.refresh()
-            router.push(`/${params.storeId}/sizes`)
+            router.push(`/${params.storeId}/colors`)
             toast.success("Store deleted")
         } catch (error) {
-            toast.error("Make sure you removed all categories using this size?")
+            toast.error("Make sure you removed all categories using this color?")
         } finally {
             setLoading(false)
             setOpen(false)
@@ -116,9 +115,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
 
             </div>
             <Separator />
-
-            
-            <Form {...form}>
+           <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                     <div className="grid grid-cols-3 gap-8">
                         <FormField
@@ -128,7 +125,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input disabled={loading} placeholder="Size name" {...field} />
+                                        <Input disabled={loading} placeholder="Color name" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -141,7 +138,15 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                                 <FormItem>
                                     <FormLabel>Value</FormLabel>
                                     <FormControl>
-                                        <Input disabled={loading} placeholder="Size value" {...field} />
+                                        <div className="flex items-center gap-x-4">
+                                        <Input disabled={loading} placeholder="Color value" {...field} />
+                                        <div 
+                                        className="border p-4 rounded-full" 
+                                        style={{backgroundColor: field.value}}/>
+
+                                        
+                                        </div>
+                                        
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
