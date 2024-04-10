@@ -130,14 +130,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 {initialData && (<Button
                     disabled={loading}
                     variant='destructive'
-                    size='sm'
+                    size='icon'
                     onClick={() => { setOpen(true) }}
-                >
+                    >
                     <Trash className="h-4 w-4" />
-                </Button>)}
+                </Button>
+            )}
 
             </div>
             <Separator />
+        
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
@@ -151,7 +153,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                     <FormControl>
                                         <ImageUpload
                                             value={field.value.map((image)=> image.url)}
-                                            disable={loading}
+                                            disabled={loading}
                                             onChange={(url) => field.onChange([...field.value, {url}])}
                                             onRemove={(url) => field.onChange([...field.value.filter((current)=> current.url !== url)])}
                                         />
@@ -343,6 +345,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
             </Form>
         </>
+      
     )
 }
 

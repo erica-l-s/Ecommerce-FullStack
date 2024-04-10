@@ -105,9 +105,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                 {initialData && (<Button
                     disabled={loading}
                     variant='destructive'
-                    size='sm'
+                    size='icon'
                     onClick={() => { setOpen(true) }}
-                >
+                    >
                     <Trash className="h-4 w-4" />
                 </Button>)}
 
@@ -126,7 +126,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                                     <FormControl>
                                         <ImageUpload
                                             value={field.value ? [field.value] : []}
-                                            disable={loading}
+                                            disabled={loading}
                                             onChange={(url) => field.onChange(url)}
                                             onRemove={() => field.onChange("")}
                                         />

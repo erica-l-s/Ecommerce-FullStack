@@ -75,7 +75,8 @@ if(!storeByYserId){
 
 export async function DELETE( 
     req:Request,
-    {params}: {params:{storeId:string, billboardId:string}}){
+    {params}: {params:{storeId:string, billboardId:string}}
+){
     try{
      const{ userId } = auth()
         

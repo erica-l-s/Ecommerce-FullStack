@@ -18,6 +18,7 @@ export const ProductClient: React.FC<ProductClientProps> = ({
 }) =>{
     const router = useRouter()
     const params = useParams()
+    
     return(
         <>
         <div className="flex items-center justify-between">
@@ -30,7 +31,7 @@ export const ProductClient: React.FC<ProductClientProps> = ({
             </Button>
         </div>
         <Separator/>
-        <DataTable searchKey="label" columns={columns} data={data}/>
+        <DataTable searchKey="name" columns={columns} data={data}/>
         <Heading title="API" description="API calls do product"/>
         <Separator/>
         <ApiList entityName="products" entityIdName="productId"/>
