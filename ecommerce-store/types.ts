@@ -1,6 +1,6 @@
 export interface BillBoard {
     id: string
-    name:string
+    label:string
     imageUrl:string
 }
 
