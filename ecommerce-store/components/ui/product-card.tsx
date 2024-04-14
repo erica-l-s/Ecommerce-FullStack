@@ -1,22 +1,25 @@
-"use cliente"
+"use client"
 
 import { Product } from "@/types"
 import Image from "next/image"
 import IconButton from "./icon-button"
 import { Expand, ShoppingCart } from "lucide-react"
+import Currency from "./currency"
 
 interface ProductCard{
     data:Product
 }
+
 const ProductCard: React.FC<ProductCard> = ({
     data
 }) => {
     return (
         <div className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
-            {}
+            {/* Image and actions */}
+
             <div className="aspect-square rounded-xl bg-gray-100 relative">
               <Image 
-              src={data?.images?.[0].url}
+              src={data?.images?.[0]?.url}
               fill
               alt="Image"
               className="aspect-square object-cover rounded-md"
@@ -35,7 +38,7 @@ const ProductCard: React.FC<ProductCard> = ({
 
               </div>
             </div>
-            {}
+            {/*Description*/}
             <div>
                 <p className="font-semibold text-lg">
                     {data.name}
@@ -43,6 +46,11 @@ const ProductCard: React.FC<ProductCard> = ({
                 <p className="text-sm text-gray-500">
                     {data.category?.name}
                 </p>
+            </div>
+            {/* Price */}
+            <div className="flex items-center justify-between">
+                <Currency value={data.price}/>
+
             </div>
         </div>
     )
