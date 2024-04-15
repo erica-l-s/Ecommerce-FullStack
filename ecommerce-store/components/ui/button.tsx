@@ -18,7 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
             w-auto
             rounded-full
             bg-black
-            border-transparen
+            border-transparent
             px-5
             py-3
             disabled:cursor-not-allowed
@@ -32,6 +32,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
 
         )}
         ref = {ref}
+        {...props}
         >
            {children}
         </button>

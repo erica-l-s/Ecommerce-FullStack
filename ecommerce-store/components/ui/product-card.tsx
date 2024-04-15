@@ -5,6 +5,8 @@ import Image from "next/image"
 import IconButton from "./icon-button"
 import { Expand, ShoppingCart } from "lucide-react"
 import Currency from "./currency"
+import { useRouter } from "next/navigation"
+
 
 interface ProductCard{
     data:Product
@@ -13,8 +15,16 @@ interface ProductCard{
 const ProductCard: React.FC<ProductCard> = ({
     data
 }) => {
+
+    const router = useRouter()
+
+    const handleClick = () => {
+        router.push(`/product/${data?.id}`)
+    }
     return (
-        <div className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
+        <div 
+        onClick={handleClick}
+        className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
             {/* Image and actions */}
 
             <div className="aspect-square rounded-xl bg-gray-100 relative">
@@ -24,7 +34,7 @@ const ProductCard: React.FC<ProductCard> = ({
               alt="Image"
               className="aspect-square object-cover rounded-md"
               />
-              <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 botton-5">
+              <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
                 <div className="flex gap-x-6 justify-center">
                   <IconButton
                   onClick={()=>{}} 
@@ -49,7 +59,7 @@ const ProductCard: React.FC<ProductCard> = ({
             </div>
             {/* Price */}
             <div className="flex items-center justify-between">
-                <Currency value={data.price}/>
+                <Currency value={data?.price}/>
 
             </div>
         </div>

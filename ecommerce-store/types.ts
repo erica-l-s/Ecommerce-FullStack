@@ -1,5 +1,3 @@
-import { SizeLimit } from "next"
-
 export interface BillBoard {
     id: string
     label:string
